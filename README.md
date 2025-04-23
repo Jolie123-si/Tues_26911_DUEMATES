@@ -68,14 +68,13 @@ Automates processes like reminders and submission tracking.
 
 ## 🖼️ Screenshots
 
-> 📸 Add screenshots of the UI, diagrams or database schema here.  
-> Replace the image links below with your actual screenshots.
+![image](https://github.com/user-attachments/assets/d6ebc9ba-1481-4253-882a-07cffa80be2e)
 
-![System Dashboard](screenshots/dashboard.png)  
-*Main interface for tracking assignments and deadlines.*
 
-![Entity Diagram](screenshots/entities.png)  
-*Entity Relationship Diagram of the core system.*
+![image](https://github.com/user-attachments/assets/3e40b24d-ed95-4a4f-b486-64be085cf71e)
+
+
+![image](https://github.com/user-attachments/assets/4fcf1151-0bbd-4d65-9421-0f7403d6a4bf)
 
 ---
 
