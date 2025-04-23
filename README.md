@@ -1,4 +1,4 @@
-# 📘 DUEMATE: Assignment Management System
+# 📘 DUEMATE
 
 **A PL/SQL Capstone Project – Adventist University of Central Africa (AUCA)**  
 **Student:** Jolie SIFA BLANDINE | **ID:** 26911  
