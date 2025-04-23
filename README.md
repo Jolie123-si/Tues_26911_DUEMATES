@@ -10,9 +10,9 @@ DUEMATE is an Assignment Management System designed to streamline assignment tra
 
 ## 📑 Table of Contents
 
-- [📌 Project Description](#-project-description)
-- [🎯 Objectives](#-objectives)
-- [🚀 Features & Benefits](#-features--benefits)
+- [📌 Phase I :Problem Statement and Presentation
+- [🎯 Phase II :Business Process Modeling 
+- [🚀 Phase III :Logical Model Design
 - [📊 Core Entities](#-core-entities)
 - [🖼️ Screenshots](#-screenshots)
 - [🔗 Project Presentation](#-project-presentation)
@@ -89,7 +89,7 @@ Automates processes like reminders and submission tracking.
 - **Oracle SQL / PL-SQL**
 - **Canva** (for presentation)
 - **BPMN / UML Diagrams** (for modeling)
-- **Microsoft Word & PowerPoint** (documentation and report)
+  
 
 ---
 
