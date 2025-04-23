@@ -20,7 +20,7 @@ DUEMATE is an Assignment Management System designed to streamline assignment tra
 - [📬 Contact](#-contact)
 
 ---
-       PHASE I
+PHASE I
 
 ## 📌 Project Description
 
