@@ -13,11 +13,11 @@ DUEMATE is an Assignment Management System designed to streamline assignment tra
 - [📌 Phase I :Problem Statement and Presentation
 - [🎯 Phase II :Business Process Modeling 
 - [🚀 Phase III :Logical Model Design
-- [📊 Core Entities](#-core-entities)
-- [🖼️ Screenshots](#-screenshots)
-- [🔗 Project Presentation](#-project-presentation)
-- [🧱 Tech Stack](#-tech-stack)
-- [📬 Contact](#-contact)
+- [📊 Phase IV :Database (Pluggable Database) Creation and Naming
+- [🖼️ Phase V:Table Implementation and Data Insertion
+- [🔗 Phase VI:Database Interaction and Transactions
+- [🧱 Phase VII:Advanced Database Programming and Auditing
+- [📬 Phase VIII:Documentation and Demostration- Reporting
 
 ---
 PHASE I
