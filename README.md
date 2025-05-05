@@ -138,6 +138,231 @@ TableSpace
 
 For any futher information please go check on the Oracle enterprise tablespace screenshot and Oracle enterprise login screenshot.
 
+----
+PHASE 5: 📝 TABLE IMPLEMENTATION AND DATA INSERTION.
+---
+TABLE CREATION:
+--
+Here are the codes for the creation of all tables while keeping data integrity and using corresponding constraints :
+```sql
+
+-- STUDENT TABLE
+CREATE TABLE Student (
+    student_id     INT PRIMARY KEY,
+    name           VARCHAR2(100) NOT NULL,
+    email          VARCHAR2(100) UNIQUE NOT NULL,
+    program        VARCHAR2(100) NOT NULL,
+    phone_number   VARCHAR2(15) NOT NULL
+);
+
+-- INSTRUCTOR TABLE
+CREATE TABLE Instructor (
+    instructor_id  INT PRIMARY KEY,
+    name           VARCHAR2(100) NOT NULL,
+    email          VARCHAR2(100) NOT NULL,
+    phone_number   VARCHAR2(15) NOT NULL
+);
+
+-- ASSIGNMENT TABLE
+CREATE TABLE Assignment (
+    assignment_id  INT PRIMARY KEY,
+    title          VARCHAR2(100) UNIQUE NOT NULL,
+    subject        VARCHAR2(100) NOT NULL,
+    created_by     INT NOT NULL,
+    due_date       DATE NOT NULL,
+    CONSTRAINT fk_instructor FOREIGN KEY (created_by)
+      REFERENCES Instructor(instructor_id)
+);
+
+-- SUBMISSION TABLE
+CREATE TABLE Submission (
+    submission_id   INT PRIMARY KEY,
+    assignment_id   INT NOT NULL,
+    student_id      INT NOT NULL,
+    CONSTRAINT fk_sub_assignment FOREIGN KEY (assignment_id) REFERENCES Assignment(assignment_id),
+    CONSTRAINT fk_sub_student FOREIGN KEY (student_id) REFERENCES Student(student_id)
+);
+
+-- REMINDER TABLE
+CREATE TABLE Reminder (
+    reminder_id     INT PRIMARY KEY,
+    student_id      INT NOT NULL,
+    assignment_id   INT NOT NULL,
+    reminder_date   DATE UNIQUE,
+    CONSTRAINT fk_reminder_student FOREIGN KEY (student_id) REFERENCES Student(student_id),
+    CONSTRAINT fk_reminder_assignment FOREIGN KEY (assignment_id) REFERENCES Assignment(assignment_id)
+);
+```
+Here are some few sample of the Tables created for futher information, I recommend you to check out phase 5 files attached
+
+![image](https://github.com/user-attachments/assets/05d5d95d-8699-4aa2-a14d-67f48e8a2ed9)
+
+DATA INSERTION:
+---
+For the purpose of keeping the readme short, we chose to use few example to demostrate the insertion of data in our Tables.
+---
+insertion for All Tables
+
+![image](https://github.com/user-attachments/assets/5feb01ce-75ed-4f3c-a5d5-9f3277777235)
+
+REMARK : Please check the files provided in the repo for the rest of screenshots
+
+PHASE 6: 📓 DATABASE INTERACTIONS AND TRANSACTION
+---
+✅ 1. DATABASE OPERATIONS
+🔹 DML: Insert, Update, Delete
+```sql
+
+-- INSERT: Add a new student
+INSERT INTO Student VALUES (104, 'Tom Rukundo', 'tom@auca.rw', 'IT', '0788123456');
+
+-- UPDATE: Change assignment title
+UPDATE Assignment
+SET title = 'Updated PL/SQL Assignment'
+WHERE assignment_id = 202;
+
+-- DELETE: Remove a reminder
+DELETE FROM Reminder
+WHERE reminder_id = 402;
+```
+🔹 DDL: Create, Alter, Drop
+```sql
+-- CREATE: Add a log table for testing triggers (optional)
+CREATE TABLE submission_log (
+  log_id INT PRIMARY KEY,
+  student_id INT,
+  assignment_id INT,
+  log_date DATE
+);
+
+-- ALTER: Add "status" column to assignment
+ALTER TABLE Assignment ADD status VARCHAR2(20) DEFAULT 'Open';
+
+-- DROP: Drop a temporary test table
+DROP TABLE temp_test IF EXISTS;
+```
+✅ 2. PROBLEM STATEMENT
+Problem:
+Instructors want to identify how many assignments each student has submitted and retrieve assignment titles using a stored procedure, while tracking students who have submitted none.
+
+----
+✅ 3. PROCEDURE – Using Cursor & Exception Handling
+
+```sql
+
+CREATE OR REPLACE PROCEDURE show_student_submissions (
+    p_student_id IN NUMBER
+)
+IS
+    CURSOR c_sub IS
+        SELECT a.title, a.due_date
+        FROM Assignment a
+        JOIN Submission s ON a.assignment_id = s.assignment_id
+        WHERE s.student_id = p_student_id;
+
+    rec c_sub%ROWTYPE;
+
+BEGIN
+    OPEN c_sub;
+    LOOP
+        FETCH c_sub INTO rec;
+        EXIT WHEN c_sub%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('Assignment: ' || rec.title || ' | Due: ' || rec.due_date);
+    END LOOP;
+    CLOSE c_sub;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
+END;
+```
+
+✅ 4. FUNCTION – Count Submissions Per Student
+
+```sql
+
+CREATE OR REPLACE FUNCTION get_submission_count (
+    p_student_id IN NUMBER
+) RETURN NUMBER
+IS
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO v_count
+    FROM Submission
+    WHERE student_id = p_student_id;
+
+    RETURN v_count;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RETURN -1;
+END;
+```
+
+✅ 5. PACKAGE – Modularizing Logic
+
+```sql
+-- PACKAGE SPEC
+CREATE OR REPLACE PACKAGE duemate_pkg AS
+    PROCEDURE show_student_submissions(p_student_id IN NUMBER);
+    FUNCTION get_submission_count(p_student_id IN NUMBER) RETURN NUMBER;
+END duemate_pkg;
+
+-- PACKAGE BODY
+CREATE OR REPLACE PACKAGE BODY duemate_pkg AS
+
+    PROCEDURE show_student_submissions(p_student_id IN NUMBER) IS
+        CURSOR c IS
+            SELECT a.title, a.due_date
+            FROM Assignment a
+            JOIN Submission s ON a.assignment_id = s.assignment_id
+            WHERE s.student_id = p_student_id;
+        rec c%ROWTYPE;
+    BEGIN
+        OPEN c;
+        LOOP
+            FETCH c INTO rec;
+            EXIT WHEN c%NOTFOUND;
+            DBMS_OUTPUT.PUT_LINE('Assignment: ' || rec.title || ' | Due: ' || rec.due_date);
+        END LOOP;
+        CLOSE c;
+    EXCEPTION
+        WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+    END;
+
+    FUNCTION get_submission_count(p_student_id IN NUMBER) RETURN NUMBER IS
+        total NUMBER;
+    BEGIN
+        SELECT COUNT(*) INTO total FROM Submission WHERE student_id = p_student_id;
+        RETURN total;
+    EXCEPTION
+        WHEN OTHERS THEN
+            RETURN -1;
+    END;
+
+END duemate_pkg;
+```
+✅ 6. TESTING
+```sql
+-- Show assignment details for a student
+EXEC duemate_pkg.show_student_submissions(101);
+
+-- Get number of submissions by a student
+SELECT duemate_pkg.get_submission_count(101) AS total_submitted FROM dual;
+```
+
+
+
+
+
+
+
+
+
+ 
+
+
 
 
 
