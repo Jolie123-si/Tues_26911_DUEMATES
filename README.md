@@ -50,133 +50,76 @@ It streamlines academic workflows, enforces deadlines, and maintains data integr
 * **Deliverable:** Documented scope, objectives, target users, and expected benefits
 
 ---
+## 💼 PHASE 2: Business Process Modeling
 
-## 📊 Phase II: Logical Data Model
+**Focus:** Defining and visualizing the end-to-end course management workflow.
 
-* **Entities:** `Student`, `Instructor`, `Assignment`, `Submission`, `Reminder`
-* **Attributes & Keys:**
+- ⚡ **Scope:**  
+  Centralize course management tasks—attendance, assignments, grading—into a single, cohesive platform.
 
-  * `Student(student_id PK, name, email UNQ, program, phone_number)`
-  * `Instructor(instructor_id PK, name, email UNQ, phone_number)`
-  * `Assignment(assignment_id PK, title UNQ, subject, due_date, instructor_id FK)`
-  * `Submission(submission_id PK, assignment_id FK, student_id FK, submission_date, status, grade)`
-  * `Reminder(reminder_id PK, assignment_id FK, student_id FK, reminder_date, method)`
-* **Normalization:** 3NF, with `NOT NULL`, `UNIQUE`, and `CHECK` constraints applied
+- 🎯 **Objectives:**  
+  - Automate attendance tracking  
+  - Simplify grading workflows  
+  - Provide real-time performance dashboards
+
+- 😈 **Key Entities:**  
+  - **Lecturer**: creates courses and assignments  
+  - **Course** & **Class**: organize curriculum and sessions  
+  - **Student**: attends classes and submits work  
+  - **Assignment** & **Grade**: track submissions and evaluations  
+  - **Department**: oversees all academic programs
+
+- 😎 **MIS Significance:**  
+  Supports data-driven decisions by giving lecturers insights into student performance and streamlining administrative overhead.  
 
 <details>
-<summary>📈 View ER Diagram</summary>
+<summary>📊 Process Diagram</summary>
 
-![ER Diagram](./screenshots/er_diagram.png)
-
+![Phase 2 – BPMN Diagram]![image](https://github.com/user-attachments/assets/56644817-ef6c-4e39-8012-02fbf2cc1219)
+  
+*Figure: Business Process Model for course management.*
 </details>
 
 ---
 
-## 🏗️ Phase III: Table Implementation & Data Insertion
+## ⚙️ PHASE 3: Logical Model Design
 
-**Table Definitions**
+**Focus:** Translating the business process into a normalized database schema.
 
-```sql
-CREATE TABLE Student (
-  student_id    INT PRIMARY KEY,
-  name          VARCHAR2(100) NOT NULL,
-  email         VARCHAR2(100) UNIQUE NOT NULL,
-  program       VARCHAR2(100) NOT NULL,
-  phone_number  VARCHAR2(15)  UNIQUE NOT NULL
-);
-```
+- 👌 **Entities:**  
+  Department, Lecturer, Course, Student, Assignment, Submission, Grade, Attendance
 
-**Sample Data**
+- 🫂 **Relationships:**  
+  - PK/FK constraints link Students ↔ Courses ↔ Lecturers  
+  - Submissions and Grades tied to Assignments and Students  
+  - Attendance records linked to Class sessions and Students
 
-```sql
-INSERT INTO Student VALUES (
-  101, 'Jolie Sifa Blandine', 'sifa@auca.rw',
-  'Software Engineering', '0788111222'
-);
-```
+- 🎊 **Goals:**  
+  - Build a 3NF-compliant schema  
+  - Ensure data accuracy, eliminate redundancy  
+  - Enable fast queries for tracking student progress and lecturer workload
 
-*(Repeat similar DDL/DML for `Instructor`, `Assignment`, `Submission`, `Reminder`.)*
+<details>
+<summary>📈 ER Diagram</summary>
 
----
-
-## 🔄 Phase IV: Database Interaction & Transactions
-
-* **JOIN Queries**
-
-  ```sql
-  SELECT s.name, a.title
-    FROM Student s
-    JOIN Submission sub ON s.student_id = sub.student_id
-    JOIN Assignment a ON sub.assignment_id = a.assignment_id;
-  ```
-* **PL/SQL Packages**
-
-  * `duemate_pkg.show_student_submissions(p_student_id)`
-  * `duemate_pkg.get_submission_count(p_student_id)`
-* **Error Handling:** Routines include exception blocks to log issues.
+![Phase 3 – ER Diagram]![image](https://github.com/user-attachments/assets/c7961a32-5699-457c-b724-a0dfab561c59)
+  
+*Figure: Logical data model for the course management system.*
+</details>
 
 ---
 
-## 🔐 Phase V: Advanced Programming & Auditing
+> Together, Phase 2 and Phase 3 provide a clear blueprint—from workflow to database design—for a robust course management system that enhances educational outcomes while supporting MIS goals.  
 
-* **Restriction Logic:** Prevent DML on weekdays & public holidays via `Holidays` table + `is_restricted_day()` function
-* **Trigger Example**
 
-  ```sql
-  CREATE OR REPLACE TRIGGER trg_block_submission
-    BEFORE INSERT OR UPDATE OR DELETE ON Submission
-    FOR EACH ROW
-  BEGIN
-    IF is_restricted_day THEN
-      RAISE_APPLICATION_ERROR(-20001,
-        'DML blocked on restricted days.');
-    END IF;
-  END;
-  ```
-* **Audit Table:** Captures user, timestamp, operation, status, and table name.
 
----
 
-## ⚙️ Installation & Setup
+ 
 
-```bash
-git clone https://github.com/Jolie123-si/DUEMATE.git
-cd DUEMATE
+ 
+     
 
-# Run scripts (as SYSDBA)
-sqlplus sys/YourPwd@XE AS SYSDBA @sql/create_tables.sql
-sqlplus sys/YourPwd@XE AS SYSDBA @sql/insert_data.sql
-sqlplus sys/YourPwd@XE AS SYSDBA @sql/packages_and_procs.sql
-sqlplus sys/YourPwd@XE AS SYSDBA @sql/triggers_and_audit.sql
-```
-
----
-
-## ▶️ Usage Examples
-
-* **Show student submissions:**
-
-  ```sql
-  EXEC duemate_pkg.show_student_submissions(101);
-  ```
-* **Count submissions:**
-
-  ```sql
-  SELECT duemate_pkg.get_submission_count(101) AS total FROM dual;
-  ```
-
----
-
-## 💡 Skills & Tools
-
-* **PL/SQL:** Procedures, functions, packages, triggers
-* **Data Modeling:** ERD design, 3NF normalization
-* **SQL:** Advanced JOINs, constraints, indexes
-* **Auditing:** Trigger-based restrictions, audit logging
-* **CI/CD:** GitHub Actions
-* **Diagramming:** Lucidchart, Draw\.io
-
----
+ 
 
 ## 📬 Contact & License
 
