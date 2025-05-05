@@ -109,6 +109,7 @@ It streamlines academic workflows, enforces deadlines, and maintains data integr
 
 ---
 PHASE 4: 📡 CREATING DATABASE AND ORACLE ENTERPRISE MANAGER
+--
 CREATION OF A PLUGGABLE DATABASE:
 ---
 We have to create a pluggable database for our project and we name it " TUE_26911_SIFA_DUEMATE_DB". I created it using the following codes
@@ -124,6 +125,24 @@ FILE_NAME_CONVERT = ('C:\app\CIOOL\product\21c\oradata\XE\pdbseed',
 
 ALTER PLUGGABLE DATABASE TUE_26911_SIFA_DUEMATE OPEN;
 ```
+The result should be like this
+![image](https://github.com/user-attachments/assets/7d1c66a1-e087-48e5-9dd2-9cf648acb63f)
+
+After this you should configure the Service Name through Net configuration assissant.
+
+ORACLE ENTERPRISE MANAGER:
+HomePage
+![image](https://github.com/user-attachments/assets/a2fb99e1-d410-42be-83d0-d743db7c0ae0)
+TableSpace
+![image](https://github.com/user-attachments/assets/e8367b7c-a14d-4adc-add5-3ba15d5bb396)
+
+For any futher information please go check on the Oracle enterprise tablespace screenshot and Oracle enterprise login screenshot.
+
+
+
+
+
+
 
 
 
