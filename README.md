@@ -123,6 +123,7 @@ FILE_NAME_CONVERT = ('C:\app\CIOOL\product\21c\oradata\XE\pdbseed',
 -- Step 2: Open the Pluggable Database
 
 ALTER PLUGGABLE DATABASE TUE_26911_SIFA_DUEMATE OPEN;
+```
 
 
 
