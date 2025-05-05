@@ -108,8 +108,24 @@ It streamlines academic workflows, enforces deadlines, and maintains data integr
 </details>
 
 ---
+PHASE 4: 📡 CREATING DATABASE AND ORACLE ENTERPRISE MANAGER
+CREATION OF A PLUGGABLE DATABASE:
+---
+We have to create a pluggable database for our project and we name it " TUE_26911_SIFA_DUEMATE_DB". I created it using the following codes
+```sql
+-- Step 1: Create the Pluggable Database (PDB)
 
-> Together, Phase 2 and Phase 3 provide a clear blueprint—from workflow to database design—for a robust course management system that enhances educational outcomes while supporting MIS goals.  
+CREATE PLUGGABLE DATABASE TUE_26911_SIFA_DUEMATE_DB
+ADMIN USER sifa_admin IDENTIFIED BY YourPassword123
+FILE_NAME_CONVERT = ('C:\app\CIOOL\product\21c\oradata\XE\pdbseed',
+'C:\app\CIOOL\product\21c\oradata\XE\TUE_26911_SIFA_DUEMATE_DB/');
+
+-- Step 2: Open the Pluggable Database
+
+ALTER PLUGGABLE DATABASE TUE_26911_SIFA_DUEMATE OPEN;
+
+
+
 
 
 
