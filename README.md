@@ -72,13 +72,8 @@ It streamlines academic workflows, enforces deadlines, and maintains data integr
 - 😎 **MIS Significance:**  
   Supports data-driven decisions by giving lecturers insights into student performance and streamlining administrative overhead.  
 
-<details>
-<summary>📊 Process Diagram</summary>
 
-![Phase 2 – BPMN Diagram]![image](https://github.com/user-attachments/assets/56644817-ef6c-4e39-8012-02fbf2cc1219)
-  
-*Figure: Business Process Model for course management.*
-</details>
+![image](https://github.com/user-attachments/assets/56644817-ef6c-4e39-8012-02fbf2cc1219)
 
 ---
 
@@ -99,13 +94,8 @@ It streamlines academic workflows, enforces deadlines, and maintains data integr
   - Ensure data accuracy, eliminate redundancy  
   - Enable fast queries for tracking student progress and lecturer workload
 
-<details>
-<summary>📈 ER Diagram</summary>
+![image](https://github.com/user-attachments/assets/c7961a32-5699-457c-b724-a0dfab561c59)
 
-![Phase 3 – ER Diagram]![image](https://github.com/user-attachments/assets/c7961a32-5699-457c-b724-a0dfab561c59)
-  
-*Figure: Logical data model for the course management system.*
-</details>
 
 ---
 PHASE 4: 📡 CREATING DATABASE AND ORACLE ENTERPRISE MANAGER
@@ -351,6 +341,11 @@ EXEC duemate_pkg.show_student_submissions(101);
 -- Get number of submissions by a student
 SELECT duemate_pkg.get_submission_count(101) AS total_submitted FROM dual;
 ```
+----
+Phase 7:🗳️ Advanced Database Programming and Auditing
+---
+This phase focuses on implementing advanced PL/SQL techniques to enhance assignment management system. These features aim to ensure system efficiency, maintain data integrity, and establish robust auditing for improved functionality and security.
+
 
 
 
