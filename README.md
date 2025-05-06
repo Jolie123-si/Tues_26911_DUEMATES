@@ -121,10 +121,9 @@ The result should be like this
 After this you should configure the Service Name through Net configuration assissant.
 
 ORACLE ENTERPRISE MANAGER:
-HomePage
-![image](https://github.com/user-attachments/assets/a2fb99e1-d410-42be-83d0-d743db7c0ae0)
-TableSpace
-![image](https://github.com/user-attachments/assets/e8367b7c-a14d-4adc-add5-3ba15d5bb396)
+---
+HomePage and Table Space
+![Enterprise Manager](https://github.com/user-attachments/assets/8f0ba9a9-b94d-4362-8d43-923045fb4c09)
 
 For any futher information please go check on the Oracle enterprise tablespace screenshot and Oracle enterprise login screenshot.
 
