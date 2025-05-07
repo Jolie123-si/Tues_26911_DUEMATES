@@ -345,6 +345,26 @@ Phase 7:🗳️ Advanced Database Programming and Auditing
 ---
 This phase focuses on implementing advanced PL/SQL techniques to enhance assignment management system. These features aim to ensure system efficiency, maintain data integrity, and establish robust auditing for improved functionality and security.
 
+Problem Statement
+----
+The AMS requires advanced programming techniques to address the following challenges:
+Missed deadlines due to lack of reminders
+
+1.Difficulty in tracking submissions and feedback
+
+2.Lack of centralized assignment management
+
+3.Limited visibility into student progress
+
+
+
+
+
+
+
+
+
+
 
 
 
