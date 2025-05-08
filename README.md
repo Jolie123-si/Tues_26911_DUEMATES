@@ -345,16 +345,63 @@ Phase 7:🗳️ Advanced Database Programming and Auditing
 ---
 This phase focuses on implementing advanced PL/SQL techniques to enhance assignment management system. These features aim to ensure system efficiency, maintain data integrity, and establish robust auditing for improved functionality and security.
 
-Problem Statement
-----
-The AMS requires advanced programming techniques to address the following challenges:
-Missed deadlines due to lack of reminders
+📌 Problem Statement
+---
+The Assignment Management System (DUEMATE) requires advanced PL/SQL programming techniques to address several real-world challenges in academic workflow automation. These include:
 
-1.Difficulty in tracking submissions and feedback
+.Enforcing academic policies and submission rules through database triggers.
 
-2.Lack of centralized assignment management
+.Handling detailed, row-by-row processing for student assignments and reminders using cursors.
 
-3.Limited visibility into student progress
+.Enhancing modularity and code reuse with PL/SQL packages that group related procedures and functions.
+
+.Implementing auditing mechanisms to monitor, restrict, and log updates or deletions of sensitive data, such as student records and assignment grades.
+---
+a) BEFORE Trigger
+
+b) Compound Trigger
+
+---
+2. Cursor Usage
+---
+3. Attributes (%TYPE and %ROWTYPE)
+ This step demonstrates the use of %TYPE and %ROWTYPE to improve efficiency and reusability in PL/SQL code
+![image](https://github.com/user-attachments/assets/a7bc71c7-f1c9-4411-8938-5cbf4c810e50)
+---
+4. Package Development
+a) Package Specification
+The package specification defines reusable procedures for logging audits and updating assignment capacities.
+```sql
+CREATE OR REPLACE PACKAGE BODY audit_pkg AS
+  2    PROCEDURE log_action(p_table IN VARCHAR2, p_operation IN VARCHAR2, p_status IN VARCHAR2) IS
+  3    BEGIN
+  4      INSERT INTO Audit_Log(user_name, table_name, operation, status)
+  5      VALUES(USER, p_table, p_operation, p_status);
+  6      COMMIT;  -- ensure audit is persisted
+  7    END log_action;
+  8  END audit_pkg;
+```
+b) Package Body
+The package body implements the procedures defined in the specification.
+```sql
+CREATE OR REPLACE PACKAGE BODY audit_pkg AS
+  2    PROCEDURE log_action(p_table IN VARCHAR2, p_operation IN VARCHAR2, p_status IN VARCHAR2) IS
+  3    BEGIN
+  4      INSERT INTO Audit_Log(user_name, table_name, operation, status)
+  5      VALUES(USER, p_table, p_operation, p_status);
+  6      COMMIT;  -- ensure audit is persisted
+  7    END log_action;
+  8  END audit_pkg;
+  9  /
+```
+5. Auditing and Restrictions
+---
+a) Auditing Example
+This trigger logs updates and deletions of sensitive student data into an audit log.
+
+
+
+
 
 
 
