@@ -366,7 +366,8 @@ b) Compound Trigger
 ---
 3. Attributes (%TYPE and %ROWTYPE)
  This step demonstrates the use of %TYPE and %ROWTYPE to improve efficiency and reusability in PL/SQL code
-![image](https://github.com/user-attachments/assets/a7bc71c7-f1c9-4411-8938-5cbf4c810e50)
+![image](https://github.com/user-attachments/assets/d0a8a5ca-54a6-4989-bd5c-c93c9b8c5f45)
+
 ---
 4. Package Development
 a) Package Specification
