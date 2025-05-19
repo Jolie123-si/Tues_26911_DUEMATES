@@ -10,8 +10,11 @@
 # 🎓 DUEMATE: Assignment Management System
 
 **Capstone Project – Adventist University of Central Africa (AUCA)**
+
 **Course:** INSY 8311 – Database Development with PL/SQL
+
 **Student:** Jolie SIFA BLANDINE (ID 26911)
+
 **Instructor:** Eric MANIRAGUHA
 
 ---
