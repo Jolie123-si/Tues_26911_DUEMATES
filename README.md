@@ -7,7 +7,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge" alt="License: MIT"></a>
 </p>
 
-# 🎓 DUEMATE: Assignment Management System
+# 🎓 DUEMATE(Assignment Management System)
 
 **Capstone Project – Adventist University of Central Africa (AUCA)**
 
