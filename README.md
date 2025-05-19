@@ -490,7 +490,8 @@ BEGIN
 END;
 /
 ```
-Scope
+**Scope**
+
 **.Triggers:** Enforce data integrity and automate workflows.
 
 **.Cursors:** Enable efficient row-by-row data processing.
@@ -504,7 +505,8 @@ Scope
 # 🚀 THIS MARKS THE CONCLUSION OF MY PROJECT
 
 
-
+**NAMES:**Jolie SIFA Blandine
+**ID:** 26911
 
 
 
@@ -549,7 +551,3 @@ Scope
 
  
 
-## 📬 Contact & License
-
-Jolie SIFA BLANDINE – [GitHub](https://github.com/Jolie123-si) • [LinkedIn](https://linkedin.com/in/sifa-jolly-blandine-02076130a/)
-Licensed under the **MIT License**.
