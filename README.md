@@ -357,10 +357,98 @@ The Assignment Management System (DUEMATE) requires advanced PL/SQL programming 
 
 .Implementing auditing mechanisms to monitor, restrict, and log updates or deletions of sensitive data, such as student records and assignment grades.
 ---
-a) BEFORE Trigger
+✅ 1. SIMPLE TRIGGERS
+```sql
+-- Create a log table
+CREATE TABLE assignment_log (
+    log_id NUMBER GENERATED ALWAYS AS IDENTITY,
+    title VARCHAR2(100),
+    created_on DATE
+);
 
-b) Compound Trigger
+-- BEFORE INSERT Trigger on Assignment table
+CREATE OR REPLACE TRIGGER trg_before_insert_assignment
+BEFORE INSERT ON assignment
+FOR EACH ROW
+BEGIN
+    INSERT INTO assignment_log (title, created_on)
+    VALUES (:NEW.title, SYSDATE);
+END;
+/
+```
+![phase 7 photo](https://github.com/user-attachments/assets/bd598bf2-9e10-41ec-97e6-e43b5b9766e7)
 
+---
+🔹 B. AFTER DELETE Trigger — Archive deleted submissions
+```sql
+-- Create a backup table
+CREATE TABLE submission_backup (
+    submission_id NUMBER,
+    assignment_id NUMBER,
+    student_id NUMBER,
+    deleted_on DATE
+);
+
+-- AFTER DELETE Trigger on Submission table
+CREATE OR REPLACE TRIGGER trg_after_delete_submission
+AFTER DELETE ON submission
+FOR EACH ROW
+BEGIN
+    INSERT INTO submission_backup (submission_id, assignment_id, student_id, deleted_on)
+    VALUES (:OLD.submission_id, :OLD.assignment_id, :OLD.student_id, SYSDATE);
+END;
+/
+```
+
+✅ 2. COMPOUND TRIGGER
+
+🔹 Compound Trigger — Count late submissions in a bulk DELETE
+```sql
+-- Table to store statistics
+CREATE TABLE late_submission_stats (
+    run_date DATE,
+    late_count NUMBER
+);
+
+-- Compound Trigger on Submission table
+CREATE OR REPLACE TRIGGER trg_compound_submission_delete
+FOR DELETE ON submission
+COMPOUND TRIGGER
+
+    -- Variable to count late submissions
+    late_count INTEGER := 0;
+
+    BEFORE STATEMENT IS
+    BEGIN
+        -- Initialize count
+        late_count := 0;
+    END BEFORE STATEMENT;
+
+    AFTER EACH ROW IS
+    DECLARE
+        v_due_date DATE;
+    BEGIN
+        -- Get the due date of the assignment
+        SELECT due_date INTO v_due_date
+        FROM assignment
+        WHERE assignment_id = :OLD.assignment_id;
+
+        -- Compare submission date (simulated here as part of OLD data)
+        IF v_due_date < SYSDATE THEN
+            late_count := late_count + 1;
+        END IF;
+    END AFTER EACH ROW;
+
+    AFTER STATEMENT IS
+    BEGIN
+        -- Log the late count after all rows are deleted
+        INSERT INTO late_submission_stats (run_date, late_count)
+        VALUES (SYSDATE, late_count);
+    END AFTER STATEMENT;
+
+END trg_compound_submission_delete;
+/
+```
 ---
 2. Cursor Usage
 ---
