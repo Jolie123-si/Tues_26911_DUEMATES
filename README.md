@@ -397,8 +397,100 @@ CREATE OR REPLACE PACKAGE BODY audit_pkg AS
 ```
 5. Auditing and Restrictions
 ---
-a) Auditing Example
-This trigger logs updates and deletions of sensitive student data into an audit log.
+Restriction function
+---
+```sql
+CREATE OR REPLACE FUNCTION is_restricted_day RETURN BOOLEAN AS
+  v_day  VARCHAR2(3);
+  v_cnt  INTEGER;
+BEGIN
+  v_day := TO_CHAR(SYSDATE, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH');
+  IF v_day IN ('MON', 'TUE', 'WED', 'THU', 'FRI') THEN
+    RETURN TRUE;
+  END IF;
+
+  SELECT COUNT(*) INTO v_cnt FROM Holidays WHERE holiday_date = TRUNC(SYSDATE);
+  RETURN v_cnt > 0;
+END;
+/
+```
+Auditing Package
+---
+```sql
+CREATE OR REPLACE PACKAGE audit_pkg AS
+  PROCEDURE log_action(p_table VARCHAR2, p_operation VARCHAR2, p_status VARCHAR2, p_record_id NUMBER);
+END;
+/
+
+CREATE OR REPLACE PACKAGE BODY audit_pkg AS
+  PROCEDURE log_action(p_table VARCHAR2, p_operation VARCHAR2, p_status VARCHAR2, p_record_id NUMBER) IS
+  BEGIN
+    INSERT INTO Audit_Log (
+      Table_Name, Operation, Status, Changed_By, Change_Date, Record_ID
+    )
+    VALUES (
+      p_table, p_operation, p_status, USER, SYSTIMESTAMP, p_record_id
+    );
+    COMMIT;
+  END;
+END;
+/
+```
+Audit Log Table
+---
+```sql
+CREATE TABLE Audit_Log (
+  Audit_ID     NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  Table_Name   VARCHAR2(50),
+  Operation    VARCHAR2(10),
+  Status       VARCHAR2(10),
+  Changed_By   VARCHAR2(50),
+  Change_Date  TIMESTAMP DEFAULT SYSTIMESTAMP,
+  Record_ID    NUMBER
+);
+```
+✅ Trigger: Restriction + Audit for Submission Table
+```sql
+CREATE OR REPLACE TRIGGER trg_submissions_restrict_audit
+  BEFORE INSERT OR UPDATE OR DELETE ON Submission
+  FOR EACH ROW
+DECLARE
+  v_op   VARCHAR2(10);
+  v_stat VARCHAR2(10);
+BEGIN
+  IF INSERTING THEN v_op := 'INSERT';
+  ELSIF UPDATING THEN v_op := 'UPDATE';
+  ELSE v_op := 'DELETE';
+  END IF;
+
+  IF is_restricted_day THEN
+    v_stat := 'DENIED';
+    audit_pkg.log_action('SUBMISSION', v_op, v_stat, NVL(:OLD.Submission_ID, :NEW.Submission_ID));
+    RAISE_APPLICATION_ERROR(-20001, '✋ DML operations on SUBMISSION are not allowed today.');
+  ELSE
+    v_stat := 'ALLOWED';
+    audit_pkg.log_action('SUBMISSION', v_op, v_stat, NVL(:OLD.Submission_ID, :NEW.Submission_ID));
+  END IF;
+END;
+/
+```
+🔄 Trigger: Audit Assignment Updates/Deletes
+```sql
+CREATE OR REPLACE TRIGGER trg_assignment_audit
+  AFTER UPDATE OR DELETE ON Assignment
+  FOR EACH ROW
+DECLARE
+  v_op VARCHAR2(10);
+BEGIN
+  IF UPDATING THEN v_op := 'UPDATE';
+  ELSE v_op := 'DELETE';
+  END IF;
+
+  audit_pkg.log_action('ASSIGNMENT', v_op, 'ALLOWED', :OLD.Assignment_ID);
+END;
+/
+```
+
 
 
 
