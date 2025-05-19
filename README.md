@@ -453,6 +453,7 @@ END trg_compound_submission_delete;
 2. Cursor Usage
 ---
 3. Attributes (%TYPE and %ROWTYPE)
+   ---
  This step demonstrates the use of %TYPE and %ROWTYPE to improve efficiency and reusability in PL/SQL code
 
 ![image](https://github.com/user-attachments/assets/d0a8a5ca-54a6-4989-bd5c-c93c9b8c5f45)
