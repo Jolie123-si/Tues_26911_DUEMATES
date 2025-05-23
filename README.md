@@ -4,7 +4,7 @@
 <p align="center">
   <a href="https://github.com/Jolie123-si/DUEMATE/actions"><img src="https://img.shields.io/github/actions/workflow/status/Jolie123-si/DUEMATE/ci.yml?branch=main&logo=github&style=flat" alt="CI"></a>
   <a href="https://www.oracle.com/database/technologies/appdev/plsql.html"><img src="https://img.shields.io/badge/PL%2FSQL-Oracle-blue?style=for-the-badge&logo=oracle" alt="PL/SQL"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge" alt="License: MIT"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge" alt="></a>
 </p>
 
 # 🎓 DUEMATE(Assignment Management System)
@@ -22,7 +22,7 @@
 ## 📑 Table of Contents
 
 1. 🚀 Project Overview
-2. 🧐 Phase I: Problem Statement
+2. 🧐 Phase I: Problem Statement and Methogology
 3. 📊 Phase II: Business Process Modeling (Related to Management Information Systems - MIS)
 4. 🏗️ Phase III: Logical Model Design
 5. 🔄 Phase IV: Database (Pluggable Database) Creation and Naming
@@ -44,6 +44,13 @@ DUEMATE is a centralized, PL/SQL-driven Assignment Management System that:
 
 It streamlines academic workflows, enforces deadlines, and maintains data integrity and security.
 
+**Methodology**
+
+MySQL/Oracle (database)
+
+IDEs like VS Code
+
+GitHub (version control)
 ---
 
 ## 🧐 Phase I: Problem Statement
@@ -55,15 +62,18 @@ It streamlines academic workflows, enforces deadlines, and maintains data integr
 ---
 ## 💼 PHASE 2: Business Process Modeling
 
-**Focus:** Defining and visualizing the end-to-end course management workflow.
+**Focus:** Defining and visualizing the end-to-end Assignment management  workflow.
 
 - ⚡ **Scope:**  
-  Centralize course management tasks—attendance, assignments, grading—into a single, cohesive platform.
+  Cenralized the digital management of assignment creation, submission, tracking, grading, and feedback between instructors and students.
+  
+- 🎯 **Objectives:**
+    
+ - To streamline the assignment submission and grading process for both students and instructors.
 
-- 🎯 **Objectives:**  
-  - Automate attendance tracking  
-  - Simplify grading workflows  
-  - Provide real-time performance dashboards
+ - To enhance transparency and tracking of assignment deadlines and statuses.
+
+-  To reduce manual workload by automating assignment notifications, submissions, and feedback delivery.
 
 - 😈 **Key Entities:**  
   - **Lecturer**: creates courses and assignments  
@@ -85,7 +95,7 @@ It streamlines academic workflows, enforces deadlines, and maintains data integr
 **Focus:** Translating the business process into a normalized database schema.
 
 - 👌 **Entities:**  
-  Department, Lecturer, Course, Student, Assignment, Submission, Grade, Attendance
+  Instructor, Student, Assignment, Submission, Reminder
 
 - 🫂 **Relationships:**  
   - PK/FK constraints link Students ↔ Courses ↔ Lecturers  
@@ -121,7 +131,7 @@ ALTER PLUGGABLE DATABASE TUE_26911_SIFA_DUEMATE OPEN;
 The result should be like this
 ![image](https://github.com/user-attachments/assets/7d1c66a1-e087-48e5-9dd2-9cf648acb63f)
 
-After this you should configure the Service Name through Net configuration assissant.
+After this I should configure the Service Name through Net configuration assissant.
 
 ORACLE ENTERPRISE MANAGER:
 ---
@@ -191,7 +201,7 @@ Here are some few sample of the Tables created for futher information, I recomme
 
 DATA INSERTION:
 ---
-For the purpose of keeping the readme short, we chose to use few example to demostrate the insertion of data in our Tables.
+For the purpose of keeping the readme short, we chose to use few example to demostrate the insertion of data in my Tables.
 ---
 insertion for All Tables
 
@@ -452,8 +462,6 @@ COMPOUND TRIGGER
 END trg_compound_submission_delete;
 /
 ```
----
-2. Cursor Usage
 ---
 3. Attributes (%TYPE and %ROWTYPE)
    ---
