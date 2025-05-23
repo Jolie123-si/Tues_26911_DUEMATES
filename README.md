@@ -4,7 +4,7 @@
 <p align="center">
   <a href="https://github.com/Jolie123-si/DUEMATE/actions"><img src="https://img.shields.io/github/actions/workflow/status/Jolie123-si/DUEMATE/ci.yml?branch=main&logo=github&style=flat" alt="CI"></a>
   <a href="https://www.oracle.com/database/technologies/appdev/plsql.html"><img src="https://img.shields.io/badge/PL%2FSQL-Oracle-blue?style=for-the-badge&logo=oracle" alt="PL/SQL"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-brightgreen?style=for-the-badge" alt="></a>
+  <a href="LICENSE"></a>
 </p>
 
 # 🎓 DUEMATE(Assignment Management System)
