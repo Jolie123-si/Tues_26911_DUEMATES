@@ -21,14 +21,14 @@
 
 ## 📑 Table of Contents
 
-1. 🚀 Project Overview
-2. 🧐 Phase I: Problem Statement and Methogology
-3. 📊 Phase II: Business Process Modeling (Related to Management Information Systems - MIS)
-4. 🏗️ Phase III: Logical Model Design
-5. 🔄 Phase IV: Database (Pluggable Database) Creation and Naming
-6. 🔐 Phase V: Table Implementation and Data Insertion
-7. ⚙️ Phase VI: Database Interaction and Transactions
-8. ▶️ Phase VII: Advanced Database Programming and Auditing
+1.  Project Overview
+2.  Phase I: Problem Statement and Methogology
+3.  Phase II: Business Process Modeling (Related to Management Information Systems - MIS)
+4.  Phase III: Logical Model Design
+5.  Phase IV: Database (Pluggable Database) Creation and Naming
+6.  Phase V: Table Implementation and Data Insertion
+7.  Phase VI: Database Interaction and Transactions
+8.  Phase VII: Advanced Database Programming and Auditing
    
    
 
