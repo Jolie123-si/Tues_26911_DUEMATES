@@ -54,7 +54,7 @@ It streamlines academic workflows, enforces deadlines, and maintains data integr
 
 ---
 
-## Methodology Summary
+## 🎯Methodology 
 
 .Database design in 3NF
 
@@ -65,6 +65,7 @@ It streamlines academic workflows, enforces deadlines, and maintains data integr
 .Restriction logic using triggers
 
 .Audit mechanism via log tables and packages
+
 ----
 ## 💼 PHASE 2: Business Process Modeling
 
