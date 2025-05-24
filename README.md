@@ -44,13 +44,6 @@ DUEMATE is a centralized, PL/SQL-driven Assignment Management System that:
 
 It streamlines academic workflows, enforces deadlines, and maintains data integrity and security.
 
-**Methodology**
-
-MySQL/Oracle (database)
-
-IDEs like VS Code
-
-GitHub (version control)
 ---
 
 ## 🧐 Phase I: Problem Statement
