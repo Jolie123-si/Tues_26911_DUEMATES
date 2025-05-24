@@ -278,6 +278,9 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
 END;
 ```
+---
+![image](https://github.com/user-attachments/assets/15b0f7cc-a02f-45d5-bb99-df3c49b467a3)
+
 
 ✅ 4. FUNCTION – Count Submissions Per Student
 
@@ -515,6 +518,9 @@ BEGIN
 END;
 /
 ```
+---
+![image](https://github.com/user-attachments/assets/f5be2e35-6a1a-4de4-a688-eac3ebf144a9)
+
 Auditing Package
 ---
 ```sql
