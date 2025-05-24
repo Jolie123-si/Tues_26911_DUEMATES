@@ -53,6 +53,15 @@ It streamlines academic workflows, enforces deadlines, and maintains data integr
 * **Deliverable:** Documented scope, objectives, target users, and expected benefits
 
 ---
+
+## Methodology Summary
+
+.Database design in 3NF
+.Use of PL/SQL: procedures, functions, packages
+.Business process modeled in BPMN and ERD diagrams
+.Restriction logic using triggers
+.Audit mechanism via log tables and packages
+----
 ## 💼 PHASE 2: Business Process Modeling
 
 **Focus:** Defining and visualizing the end-to-end Assignment management  workflow.
