@@ -497,7 +497,7 @@ CREATE OR REPLACE PACKAGE BODY audit_pkg AS
 Restriction function
 ---
 ```sql
-CREATE OR REPLACE FUNCTION is_restricted_day RETURN BOOLEAN AS
+CREATE OR REPLACE FUNCTION is_restricted_day RETURN BOOLEAN IS
   v_day  VARCHAR2(3);
   v_cnt  INTEGER;
 BEGIN
